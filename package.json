@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "main": "electron/main.js",
   "scripts": {
-    "dev": "vite --host 127.0.0.1"
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "desktop": "npm run build && electron .",
+    "desktop:dev": "electron ."
   },
   "dependencies": {
     "@vitejs/plugin-basic-ssl": "^1.2.0",
+    "electron": "^31.7.7",
     "vite": "^5.4.11"
   },
   "devDependencies": {}

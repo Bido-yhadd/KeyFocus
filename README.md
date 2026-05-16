@@ -6,6 +6,16 @@ Focus is Key.
 
 The reusable webcam/classification logic lives in `src/lookAwayDetector.js`.
 
+## Desktop app
+
+Run the standalone Electron app with:
+
+```sh
+npm run desktop
+```
+
+After entering an email, the Electron window minimizes while the detector keeps running. When `onLookAway` fires, the app window is restored and `src/game/index.js` starts the game placeholder.
+
 ```js
 import { createLookAwayDetector } from "./src/lookAwayDetector.js";
 

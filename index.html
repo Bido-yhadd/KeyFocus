@@ -3,77 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Look Away Detector</title>
+    <title>Key Focused</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <main class="app-shell">
-      <section class="camera-stage" aria-label="Webcam look-away classifier">
-        <video id="video" playsinline muted></video>
-        <canvas id="overlay"></canvas>
-        <div class="status-panel" id="statusPanel">
-          <div class="status-topline">
-            <span id="stateDot" class="state-dot idle"></span>
-            <span id="statusText">Loading model</span>
-          </div>
-          <div id="reasonText" class="reason-text">Allow camera access when prompted.</div>
+      <section class="hero-panel" aria-labelledby="appTitle">
+        <div class="hero-copy">
+          <h1 id="appTitle">Key Focused</h1>
         </div>
+
+        <form id="launchForm" class="launch-form" novalidate>
+          <label for="emailInput">
+            <span>Email</span>
+            <input
+              id="emailInput"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            />
+          </label>
+
+          <p id="formError" class="form-error" role="alert"></p>
+
+          <button id="confirmButton" class="primary-button" type="submit" disabled>
+            Preparing
+          </button>
+        </form>
       </section>
 
-      <aside class="controls" aria-label="Detector controls">
-        <div>
-          <h1>Look Away Detector</h1>
-          <p>
-            Webcam-based head and eye direction classifier using MediaPipe Face Landmarker.
-          </p>
-        </div>
-
-        <button id="startButton" class="primary-button" type="button" disabled>
-          Start webcam
-        </button>
-
-        <div class="metric-grid">
-          <div class="metric">
-            <span>Head yaw</span>
-            <strong id="yawValue">0.00</strong>
-          </div>
-          <div class="metric">
-            <span>Eye gaze</span>
-            <strong id="gazeValue">0.00</strong>
-          </div>
-          <div class="metric">
-            <span>Pitch</span>
-            <strong id="pitchValue">0.00</strong>
-          </div>
-          <div class="metric">
-            <span>Confidence</span>
-            <strong id="confidenceValue">0%</strong>
+      <section id="sessionPanel" class="session-panel is-locked" aria-label="Focus session">
+        <div class="camera-stage" aria-hidden="true">
+          <video id="video" playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <div class="status-panel" id="statusPanel">
+            <div class="status-topline">
+              <span id="stateDot" class="state-dot idle"></span>
+              <span id="statusText">Loading model</span>
+            </div>
+            <div id="reasonText" class="reason-text">Confirm your details to start.</div>
           </div>
         </div>
 
-        <label class="control-row">
-          <span>Head sensitivity</span>
-          <input id="headThreshold" type="range" min="0.10" max="0.35" value="0.18" step="0.01" />
-          <output id="headThresholdValue">0.18</output>
-        </label>
-
-        <label class="control-row">
-          <span>Eye sensitivity</span>
-          <input id="eyeThreshold" type="range" min="0.12" max="0.42" value="0.24" step="0.01" />
-          <output id="eyeThresholdValue">0.24</output>
-        </label>
-
-        <label class="control-row">
-          <span>Debounce frames</span>
-          <input id="debounceFrames" type="range" min="1" max="12" value="4" step="1" />
-          <output id="debounceFramesValue">4</output>
-        </label>
-
-        <div class="event-log" aria-live="polite">
-          <div class="event-log-title">Events</div>
-          <ol id="eventLog"></ol>
-        </div>
-      </aside>
+        <section class="game-stage" aria-label="Look-away game">
+          <div id="gameRoot" class="game-root"></div>
+        </section>
+      </section>
     </main>
 
     <script type="module" src="/src/app.js"></script>
